@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ankana Biswas - Portfolio</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="icon" type="image/png" href="image/icon.png">
+<style>
+    :where([class^="ri-"])::before {
+        content: "\f3c2";
+    }
+
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .typing-animation {
+        overflow: hidden;
+        border-right: 3px solid #6366f1;
+        white-space: nowrap;
+        animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+
+    @keyframes blink-caret {
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: #6366f1;
+        }
+    }
+
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-bar {
+        background: linear-gradient(90deg, #edd9e5 0%, #a66c8e 100%);
+        animation: fillBar 2s ease-in-out;
+    }
+
+    @keyframes fillBar {
+        from {
+            width: 0%;
+        }
+    }
+
+    .flip-card {
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+    }
+
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .nav-link {
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-link:hover {
+        transform: scale(1.1);
+        color: #a66c8e;
+    }
+
+    .mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.active {
+        transform: translateX(0);
+    }
+
+    .rounded-button {
+        background-color: #ffffff;
+        color: #a66c8e;
+        border: 2px solid #a66c8e;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .rounded-button:hover {
+        background-color: #a66c8e;
+        color: #ffffff;
+    }
+</style>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#6366f1',
+                    secondary: '#8b5cf6'
+                },
+                borderRadius: {
+                    'none': '0px',
+                    'sm': '4px',
+                    DEFAULT: '8px',
+                    'md': '12px',
+                    'lg': '16px',
+                    'xl': '20px',
+                    '2xl': '24px',
+                    '3xl': '32px',
+                    'full': '9999px',
+                    'button': '8px'
+                }
+            }
+        }
+    }
+</script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <nav class="fixed top-0 w-full bg-[#ffffff]/90 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-xl font-bold text-[#a66c8e]">Ankana Biswas</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">About</a>
+                    <a href="#skills" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">Skills</a>
+                    <a href="#projects" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">Projects</a>
+                    <a href="#hobbies" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">Hobbies</a>
+                    <a href="#contact" class="nav-link text-[#000000] hover:text-[#a66c8e] transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden w-6 h-6 flex items-center justify-center" id="mobile-menu-btn">
+                    <i class="ri-menu-line text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu fixed top-16 right-0 w-64 h-screen bg-white shadow-lg md:hidden" id="mobile-menu">
+            <div class="flex flex-col p-6 space-y-4">
+                <a href="#home" class="text-gray-700 hover:text-[#a66c8e] transition-colors">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-[#a66c8e] transition-colors">About</a>
+                <a href="#skills" class="text-gray-700 hover:text-[#a66c8e] transition-colors">Skills</a>
+                <a href="#projects" class="text-gray-700 hover:text-[#a66c8e] transition-colors">Projects</a>
+                <a href="#hobbies" class="text-gray-700 hover:text-[#a66c8e] transition-colors">Hobbies</a>
+                <a href="#contact" class="text-gray-700 hover:text-[#a66c8e] transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="text-center text-white z-10 pt-[150px] pb-[60px]" style="background: #fcf7fb; height: 700px;">
+        <div class="w-[200px] h-[200px] mx-auto mb-8 rounded-full overflow-hidden floating">
+            <img src="image/ankanafull.png" alt="Ankana Biswas" class="w-full h-full object-cover object-top">
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 text-[#a66c8e]">Ankana Biswas</h1>
+        <p class="text-xl md:text-2xl mb-8 opacity-90 text-[#000000]">Computer Science Engineering Student | Tech Enthusiast</p>
+        <p class="text-lg mb-8 max-w-2xl mx-auto opacity-80 text-[#000000]">Passionate about technology and innovation, transitioning from biology to computer science to explore the endless possibilities of the digital world.</p>
+        <a href="#about" class="inline-block rounded-button font-semibold whitespace-nowrap">Learn More About Me</a>
+    </section>
+    <div class="absolute top-20 right-20 text-white/20"></div>
+    <div class="absolute bottom-20 left-20 text-white/20"></div>
+    </section>
+    <section id="about" class="py-16 md:py-20 bg-[#ffffff]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#a66c8e] mb-4">About Me</h2>
+                <p class="text-base md:text-lg text-[000000] max-w-2xl mx-auto">My journey from biology to computer science and everything that drives my passion for technology</p>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center justify-center w-full mt-12 gap-8">
+                <div class="w-full md:w-2/3 lg:w-2/5">
+                    <img src="image/about-ankana.png" alt="About Ankana" class="w-full rounded-2xl object-cover object-top">
+                </div>
+                <div class="w-full lg:w-3/5">
+                    <h3 class="text-xl md:text-2xl font-bold text-[#a66c8e] mb-6 mt-8 md:mt-0">From Biology to Computer Science</h3>
+                    <p class="text-[000000] mb-6">After completing my class 11 and 12 in biology, I came to realize that my true vocation lies within the dynamic and ever-evolving field of technology. The rapid evolution of computer science and its potential to solve real-world problems fascinated me, leading to my decision to pursue B.Tech in Computer Science Engineering.</p>
+                    <p class="text-[000000] mb-8">This transition wasn't just a career change, it was a journey of discovering my passion for creating, innovating and building solutions that can make a difference in people's lives.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                                <i class="ri-graduation-cap-line text-[#a66c8e] text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#a66c8e]">Current Education</h4>
+                                <p class="text-[#000000]">B.Tech in Computer Science Engineering</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                                <i class="ri-microscope-line text-[#a66c8e] text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#a66c8e]">Previous Background</h4>
+                                <p class="text-[#000000]">Biology (Class 11 & 12)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                                <i class="ri-rocket-line text-[#a66c8e] text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-[#a66c8e]">Goal</h4>
+                                <p class="text-[#000000]">To grow in the dynamic technology world</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="skills" class="py-20 pt-[100px]" style="background-color: #E5E1DB;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-[#a66c8e] mb-4">Skills & Expertise</h2>
+                <p class="text-lg text-[000000] max-w-2xl mx-auto">Technical and creative skills I've developed on my journey</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-html5-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">HTML & CSS</h3>
+                    <p class="text-[#000000] mb-4">Solid foundation in web markup and styling</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-html h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">85% Proficiency</span>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-bootstrap-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">Bootstrap</h3>
+                    <p class="text-[#000000] mb-4 w-[90%]">Responsive design framework expertise</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-bootstrap h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">80% Proficiency</span>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-tailwind-css-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">Tailwind CSS</h3>
+                    <p class="text-[#000000] mb-4 w-[80%]">Modern utility-first CSS framework</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-tailwind h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">75% Proficiency</span>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-palette-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">Canva</h3>
+                    <p class="text-[#000000] mb-4">Graphic design and visual content creation</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-canva h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">90% Proficiency</span>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-code-s-slash-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">Problem Solving</h3>
+                    <p class="text-[#000000] mb-4 w-[90%]">Analytical thinking and debugging skills</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-problem h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">85% Proficiency</span>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm card-hover">
+                    <div class="w-16 h-16 bg-[#a66c8e]/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="ri-pencil-ruler-2-line text-[#a66c8e] text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#a66c8e] mb-4">Creative Design</h3>
+                    <p class="text-[#000000] mb-4 w-[80%]">UI/UX design principles and creativity</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="skill-bar skill-bar-creative h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                    <span class="text-sm text-[#a66c8e] mt-2 block">80% Proficiency</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-[#a66c8e] mb-4">Projects</h2>
+                <p class="text-lg text-[#000000] max-w-2xl mx-auto">Exciting projects coming soon as I continue my journey in computer science</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl overflow-hidden card-hover relative">
+                    <div class="h-48 bg-gradient-to-br from-[#a66c8e]/20 to-secondary/20 flex items-center justify-center">
+                        <i class="ri-code-box-line text-6xl text-[#a66c8e]"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[#a66c8e]">Web Development Project</h3>
+                        <p class="text-[000000] mb-4">A comprehensive web application showcasing modern design principles and responsive layouts.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">HTML</span>
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-[#a66c8e]/90 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <span class="text-white font-semibold text-lg">Coming Soon</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl overflow-hidden card-hover relative">
+                    <div class="h-48 bg-gradient-to-br from-[#a66c8e]/20 to-secondary/20 flex items-center justify-center">
+                        <i class="ri-smartphone-line text-6xl text-[#a66c8e]"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[#a66c8e]">Mobile-First Design</h3>
+                        <p class="text-[000000] mb-4">Responsive design project focusing on mobile user experience and progressive enhancement.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">Bootstrap</span>
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-[#a66c8e]/90 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <span class="text-white font-semibold text-lg">Coming Soon</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl overflow-hidden card-hover relative">
+                    <div class="h-48 bg-gradient-to-br from-[#a66c8e]/20 to-secondary/20 flex items-center justify-center">
+                        <i class="ri-palette-line text-6xl text-[#a66c8e]"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[#a66c8e]">Creative Portfolio</h3>
+                        <p class="text-[000000] mb-4 w-[80%]">A showcase of creative designs and visual content created using various design tools.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">Canva</span>
+                            <span class="px-3 py-1 bg-[#a66c8e]/10 text-[#a66c8e] text-sm rounded-full">Design</span>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-[#a66c8e]/90 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <span class="text-white font-semibold text-lg">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="hobbies" class="py-20 bg-[#E5E1DB]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-[#a66c8e] mb-4">Hobbies & Interests</h2>
+                <p class="text-lg text-[#000000] max-w-2xl mx-auto">What I love to do in my free time</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-2xl p-8 flex flex-col items-center justify-center shadow-sm">
+                            <div class="w-20 h-20 bg-[#a66c8e]/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="ri-book-open-line text-[#a66c8e] text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-[#a66c8e] mb-4">Reading</h3>
+                            <p class="text-[#000000] text-center">Exploring different worlds through books</p>
+                        </div>
+                        <div class="flip-card-back bg-[#a66c8e] rounded-2xl p-8 flex flex-col items-center justify-center text-white">
+                            <h3 class="text-2xl font-semibold text-[#000000] mb-4">My Reading Journey</h3>
+                            <p class="text-center mb-4">I love diving into various genres, from science fiction to personal development books. Reading helps me expand my knowledge and imagination.</p>
+                            <p class="text-center opacity-90">Currently reading about technology trends and innovation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-2xl p-8 flex flex-col items-center justify-center shadow-sm">
+                            <div class="w-20 h-20 bg-[#a66c8e]/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="ri-film-line text-[#a66c8e] text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-[#a66c8e] mb-4">Movies</h3>
+                            <p class="text-[#000000] text-center">Thriller & Horror enthusiast</p>
+                        </div>
+                        <div class="flip-card-back bg-[#a66c8e] rounded-2xl p-8 flex flex-col items-center justify-center text-white">
+                            <h3 class="text-2xl font-semibold text-[#000000] mb-4">Movie Passion</h3>
+                            <p class="text-center mb-4">I'm fascinated by thriller and horror movies. The suspense, plot twists and psychological elements keep me engaged and entertained.</p>
+                            <p class="text-center opacity-90">Always looking for the next great thriller to watch!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-white rounded-2xl p-8 flex flex-col items-center justify-center shadow-sm">
+                            <div class="w-20 h-20 bg-[#a66c8e]/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="ri-brush-line text-[#a66c8e] text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-[#a66c8e] mb-4">Drawing</h3>
+                            <p class="text-[#000000] text-center">Creative expression through art</p>
+                        </div>
+                        <div class="flip-card-back bg-[#a66c8e] rounded-2xl p-8 flex flex-col items-center justify-center text-white">
+                            <h3 class="text-2xl font-semibold text-[#000000] mb-4">Artistic Side</h3>
+                            <p class="text-center mb-4">Drawing allows me to express my creativity and relax. I enjoy sketching portraits, landscapes and abstract designs.</p>
+                            <p class="text-center opacity-90">Art helps me think differently and approach problems creatively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="contact" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-[#a66c8e] mb-4">Get In Touch</h2>
+            <p class="text-lg text-[#000000] max-w-2xl mx-auto">
+                Let's connect and discuss opportunities, projects or just have a friendly conversation
+            </p>
+        </div>
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+            <div class="flex-1 flex justify-center items-start">
+                <img src="image/call.png" alt="Contact" class="w-full max-w-sm rounded-2xl object-cover object-top">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-2xl font-semibold text-[#a66c8e] mb-6">Contact Information</h3>
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                            <i class="ri-mail-line text-[#a66c8e] text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-[#a66c8e]">Email</h4>
+                            <p class="text-[#000000]">
+                                <a href="mailto:ankanabiswas15@gmail.com" class="hover:underline">
+                                    ankanabiswas15@gmail.com
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                            <i class="ri-linkedin-line text-[#a66c8e] text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-[#a66c8e]">LinkedIn</h4>
+                            <p class="text-[#000000]">
+                                <a href="https://www.linkedin.com/in/ankana-biswas-a80a30363" target="_blank"
+                                    class="hover:underline">
+                                    linkedin.com/in/ankana-biswas
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-[#a66c8e]/10 rounded-full flex items-center justify-center">
+                            <i class="ri-github-line text-[#a66c8e] text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-[#a66c8e]">GitHub</h4>
+                            <p class="text-[#000000]">
+                                <a href="https://github.com/ankana-me" target="_blank" class="hover:underline">
+                                    github.com/ankana-biswas
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-[#E5E1DB] py-6">
+    <div class="text-center">
+        <p class="text-black text-sm md:pl-[20px] md:pr-[20px] md:text-[12px] lg:pl-[0px] lg:pr-[0px] lg:text-[16px]">© 2025 Ankana Biswas | Made with 🖤 and lots of coffee.</p>
+    </div>
+</footer>
+
+<button id="back-to-top"
+    class="fixed bottom-8 right-8 w-12 h-12 bg-[#a66c8e] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#663f56] transition-all opacity-0 pointer-events-none">
+    <i class="ri-arrow-up-line text-lg"></i>
+</button>
+
+<script id="mobile-menu-script">
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('active');
+        });
+        document.addEventListener('click', function (e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    });
+</script>
+
+<script id="contact-form-script">
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            successMessage.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 5000);
+        });
+    });
+</script>
+
+<script id="scroll-effects-script">
+    document.addEventListener('DOMContentLoaded', function () {
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+        });
+        backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                }
+                document.getElementById('mobile-menu').classList.remove('active');
+            });
+        });
+    });
+</script>
+
+<script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd', {
+        api_host: 'https://us.i.posthog.com',
+        autocapture: false,
+        capture_pageview: false,
+        capture_pageleave: false,
+        capture_performance: {
+            web_vitals: false,
+        },
+        rageclick: false,
+    })
+</script>
+
+</html>
